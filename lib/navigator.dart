@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'components/size_config.dart';
 
 class NavigatorPage extends StatefulWidget {
-  const NavigatorPage({Key? key}) : super(key: key);
+  const NavigatorPage({Key key}) : super(key: key);
 
   @override
   _NavigatorPageState createState() => _NavigatorPageState();
@@ -61,8 +61,11 @@ class _NavigatorPageState extends State<NavigatorPage> {
                     SizedBox(height: SizeConfig.blockHeight * 2),
                     _button("Instant Booking UI", '/instant_booking', context,
                         Colors.yellow),
-                    // SizedBox(height: SizeConfig.blockHeight * 2),
-                    // _button("Add Cow UI", '/add_cow', context, Colors.orange),
+                    SizedBox(height: SizeConfig.blockHeight * 2),
+                    _button("Payment Mode UI", '/payment_mode', context,
+                        Colors.orange),
+                    SizedBox(height: SizeConfig.blockHeight * 2),
+                    _button("Scan QR UI", '/qr_scanner', context, Colors.red),
                     // SizedBox(height: SizeConfig.blockHeight * 2),
                     // Text("Cow Locator")
                   ],

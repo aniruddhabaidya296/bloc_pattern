@@ -23,8 +23,8 @@ class Utils {
 
   static void showSheet(
     BuildContext context, {
-    required Widget child,
-    required VoidCallback onClicked,
+    Widget child,
+    VoidCallback onClicked,
   }) =>
       showCupertinoModalPopup(
         context: context,

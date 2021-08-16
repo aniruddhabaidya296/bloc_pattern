@@ -26,7 +26,7 @@ class StudentLoaded extends StudentState {
 class StudentError extends StudentState {
   String message;
 
-  StudentError({required this.message});
+  StudentError({this.message});
 
   @override
   List<Object> get props => [message];

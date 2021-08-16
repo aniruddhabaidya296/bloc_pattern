@@ -10,5 +10,5 @@ class FetchStudent extends StudentEvent {
   // final Student student;
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }

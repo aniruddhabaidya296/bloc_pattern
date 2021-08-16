@@ -7,7 +7,7 @@ import 'colors.dart';
 
 class CustomMonthPicker extends StatefulWidget {
   final monthIndex;
-  const CustomMonthPicker({Key? key, this.monthIndex}) : super(key: key);
+  const CustomMonthPicker({Key key, this.monthIndex}) : super(key: key);
 
   @override
   _CustomMonthPickerState createState() =>
@@ -15,7 +15,7 @@ class CustomMonthPicker extends StatefulWidget {
 }
 
 class _CustomMonthPickerState extends State<CustomMonthPicker> {
-  late int monthIndex;
+  int monthIndex;
 
   static List<String> months = [
     'January',
@@ -99,14 +99,14 @@ class _CustomMonthPickerState extends State<CustomMonthPicker> {
 
 class CustomDayPicker extends StatefulWidget {
   final dayIndex;
-  const CustomDayPicker({Key? key, this.dayIndex}) : super(key: key);
+  const CustomDayPicker({Key key, this.dayIndex}) : super(key: key);
 
   @override
   _CustomDayPickerState createState() => _CustomDayPickerState(this.dayIndex);
 }
 
 class _CustomDayPickerState extends State<CustomDayPicker> {
-  late int dayIndex;
+  int dayIndex;
 
   static List<String> days = [];
 

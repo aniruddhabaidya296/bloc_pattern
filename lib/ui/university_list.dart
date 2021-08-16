@@ -6,14 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
 
 class UniversityList extends StatefulWidget {
-  UniversityList({Key? key}) : super(key: key);
+  UniversityList({Key key}) : super(key: key);
 
   @override
   _UniversityListState createState() => _UniversityListState();
 }
 
 class _UniversityListState extends State<UniversityList> {
-  late UniversityBloc universityBloc;
+  UniversityBloc universityBloc;
 
   @override
   void initState() {

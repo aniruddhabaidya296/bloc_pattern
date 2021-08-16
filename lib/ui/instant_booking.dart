@@ -2,86 +2,8 @@ import 'package:bloc_patter_example_app/components/colors.dart';
 import 'package:bloc_patter_example_app/components/size_config.dart';
 import 'package:flutter/material.dart';
 
-class ViewProfileListItem extends StatelessWidget {
-  VoidCallback onPress;
-  String label;
-  IconData icon;
-  String greenText;
-
-  ViewProfileListItem({
-    required this.onPress,
-    required this.label,
-    required this.icon,
-    this.greenText = '',
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: SizeConfig.blockWidth * 86,
-      height: SizeConfig.blockHeight * 7.7,
-      margin: EdgeInsets.only(bottom: SizeConfig.blockHeight * 3.5),
-      decoration: BoxDecoration(
-          // color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-          // color: const Color(0xFF66BB6A),
-          boxShadow: [
-            new BoxShadow(
-              color: Colors.black26,
-              blurRadius: 5.0,
-            ),
-          ]),
-      child: Material(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        child: InkWell(
-          onTap: () {
-            onPress();
-          },
-          child: ListTile(
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 0, horizontal: SizeConfig.blockWidth * 3),
-            leading: Icon(
-              icon,
-              color: COLORS.blueMedium,
-              size: SizeConfig.blockWidth * 7.5,
-            ),
-            title: RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(
-                text: label,
-                style: TextStyle(
-                  fontFamily: 'Rubik',
-                  color: COLORS.blueDark,
-                  fontSize: SizeConfig.blockWidth * 4.5,
-                  fontWeight: FontWeight.w500,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: "$greenText",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.blockWidth * 4,
-                        wordSpacing: 5,
-                        color: Color(0xff70AD47),
-                      )),
-                ],
-              ),
-            ),
-            trailing: Icon(
-              Icons.keyboard_arrow_right,
-              color: COLORS.blueMedium,
-              size: SizeConfig.blockWidth * 7,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class InstantBooking extends StatefulWidget {
-  const InstantBooking({Key? key}) : super(key: key);
+  const InstantBooking({Key key}) : super(key: key);
 
   @override
   _InstantBookingState createState() => _InstantBookingState();
@@ -131,6 +53,9 @@ class _InstantBookingState extends State<InstantBooking> {
                           fontSize: SizeConfig.blockWidth * 4.5,
                         ),
                       ),
+                      SizedBox(
+                        height: SizeConfig.blockHeight * 0.5,
+                      ),
                       Text(
                         'Honda Civic',
                         style: TextStyle(
@@ -139,6 +64,9 @@ class _InstantBookingState extends State<InstantBooking> {
                           // fontWeight: FontWeight.w700,
                           fontSize: SizeConfig.blockWidth * 3.5,
                         ),
+                      ),
+                      SizedBox(
+                        height: SizeConfig.blockHeight * 0.5,
                       ),
                       Text(
                         'AH201358697',
@@ -272,10 +200,13 @@ class _InstantBookingState extends State<InstantBooking> {
                   contentPadding: EdgeInsets.symmetric(
                       vertical: 0, horizontal: SizeConfig.blockWidth * 4),
                   title: Text(
-                    "Ranganath Compound, Hosur Rd, Santha..",
+                    "Ranganath Compound, Hosur Rd, Santhaadsfghkjlsdfghjkl;",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontFamily: "Rubik"),
+                    style: TextStyle(
+                      letterSpacing: SizeConfig.blockWidth * 0.2,
+                      fontFamily: "Rubik",
+                    ),
                   ),
                 ),
               ),
@@ -319,16 +250,16 @@ class _InstantBookingState extends State<InstantBooking> {
                     "328-332,13th Main Rd,Teachers Colony, Compound, Hosur Rd, Santha..",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontFamily: "Rubik"),
+                    style: TextStyle(
+                        letterSpacing: SizeConfig.blockWidth * 0.2,
+                        fontFamily: "Rubik"),
                   ),
                 ),
               ),
             ),
           ),
           Container(
-            width: SizeConfig.blockWidth * 86,
-            // height: SizeConfig.blockHeight * 5.7,
-            // margin: EdgeInsets.only(bottom: SizeConfig.blockHeight * 3.5),
+            width: SizeConfig.blockWidth * 92,
             child: Material(
               borderRadius: BorderRadius.circular(5),
               child: InkWell(
@@ -361,7 +292,78 @@ class _InstantBookingState extends State<InstantBooking> {
                 borderRadius: BorderRadius.all(
                     Radius.circular(SizeConfig.blockWidth * 1.7)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (ctx) => Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        bottom: SizeConfig.blockHeight * -3.5,
+                        child: Container(
+                          // height: SizeConfig.blockHeight * 20,
+                          child: AlertDialog(
+                            content: Builder(
+                              builder: (context) {
+                                return Container(
+                                  width: SizeConfig.blockWidth * 100,
+                                  // height: SizeConfig.blockHeight * 20,
+                                  child: Column(
+                                    // runSpacing: SizeConfig.blockHeight * 2,
+                                    children: [
+                                      ListTile(
+                                        leading: Icon(
+                                          Icons.payment,
+                                          color: COLORS.blueDark,
+                                          size: SizeConfig.blockWidth * 7,
+                                        ),
+                                        horizontalTitleGap: 0,
+                                        title: Text(
+                                          "Online Payment",
+                                          style: TextStyle(
+                                            fontFamily: 'Rubik',
+                                            color: COLORS.blueDark,
+                                            // fontSize: SizeConfig.blockWidth * 5,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                      Divider(
+                                        height: SizeConfig.blockHeight * 2,
+                                        thickness: SizeConfig.blockWidth * 0.5,
+                                      ),
+                                      ListTile(
+                                        contentPadding: EdgeInsets.only(
+                                            left: SizeConfig.blockWidth * 5),
+                                        leading: Image.asset(
+                                          "assets/images/rupee.png",
+                                          width: SizeConfig.blockWidth * 6,
+                                          height: SizeConfig.blockHeight * 6,
+                                        ),
+                                        horizontalTitleGap: 0,
+                                        title: Text(
+                                          "Cash",
+                                          style: TextStyle(
+                                            fontFamily: 'Rubik',
+                                            color: COLORS.greenMedium,
+                                            // fontSize: SizeConfig.blockWidth * 5,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
               padding: EdgeInsets.fromLTRB(
                   SizeConfig.blockWidth * 35,
                   SizeConfig.blockHeight * 2,

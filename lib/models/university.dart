@@ -1,8 +1,8 @@
 class University {
-  late String country;
-  late String alphaTwoCode;
-  late String name;
-  late List<dynamic> domains;
+  String country;
+  String alphaTwoCode;
+  String name;
+  List<dynamic> domains;
   void createUniversity(
       String country, String alphaTwoCode, String name, List<dynamic> domains) {
     this.country = country;

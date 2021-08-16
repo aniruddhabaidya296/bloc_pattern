@@ -8,7 +8,7 @@ import 'student_event.dart';
 import 'student_state.dart';
 
 class StudentBloc extends Bloc<StudentEvent, StudentState> {
-  late StudentDao studentDao;
+  StudentDao studentDao;
   Student student = new Student();
 
   StudentBloc() : super(StudentEmpty()) {

@@ -8,7 +8,7 @@ import 'package:bloc_patter_example_app/models/university.dart';
 import 'package:http/http.dart';
 
 class UniversityBloc extends Bloc<UniversityEvent, UniversityState> {
-  late UniversityDao universityDao;
+  UniversityDao universityDao;
 
   UniversityBloc() : super(UniversityEmpty()) {
     universityDao = UniversityDao();

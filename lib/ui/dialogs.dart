@@ -74,13 +74,13 @@ tripScheduledSuccessfully(BuildContext context, String title) async {
 }
 
 Widget matButton(
-    {required String title,
-    required IconData icon,
-    required Color buttonColor,
-    required Color textColor,
-    Color? borderColor,
-    double? minwidth,
-    required VoidCallback onPress}) {
+    {String title,
+    IconData icon,
+    Color buttonColor,
+    Color textColor,
+    Color borderColor,
+    double minwidth,
+    VoidCallback onPress}) {
   return Container(
     height: SizeConfig.blockHeight * 7,
     child: MaterialButton(

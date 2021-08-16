@@ -1,8 +1,8 @@
 class Student {
-  late String name;
-  late String std;
-  late String school;
-  late String board;
+  String name;
+  String std;
+  String school;
+  String board;
   void createStudent(String name, String std, String school, String board) {
     this.name = name;
     this.std = std;
