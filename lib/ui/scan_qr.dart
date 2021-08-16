@@ -1,14 +1,18 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:bloc_patter_example_app/blocs/instant_ride_bloc.dart/instant_ride_bloc.dart';
+import 'package:bloc_patter_example_app/blocs/instant_ride_bloc.dart/instant_ride_event.dart';
 import 'package:bloc_patter_example_app/components/size_config.dart';
-import 'package:bloc_patter_example_app/ui/panel.dart';
+import 'package:bloc_patter_example_app/ui/instant_booking.dart';
+import 'package:bloc_patter_example_app/components/panel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import 'components/colors.dart';
+import '../components/colors.dart';
 
 class ScanQR extends StatefulWidget {
   @override
@@ -78,7 +82,7 @@ class _ScanQRState extends State<ScanQR> {
                   ),
                 ),
                 Positioned(
-                  bottom: SizeConfig.blockHeight * 35,
+                  bottom: SizeConfig.blockHeight * 33,
                   left: SizeConfig.screenWidth / 2.35,
                   child: Container(
                     child: FloatingActionButton(
@@ -96,7 +100,7 @@ class _ScanQRState extends State<ScanQR> {
                   ),
                 ),
                 Positioned(
-                  bottom: SizeConfig.blockHeight * 32,
+                  bottom: SizeConfig.blockHeight * 30,
                   child: Container(
                     width: SizeConfig.screenWidth,
                     child: FutureBuilder(
@@ -164,6 +168,20 @@ class _ScanQRState extends State<ScanQR> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        if (scanData.code != null && int.parse(scanData.code) is int) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BlocProvider<InstantBookingBloc>(
+                create: (context) => InstantBookingBloc()
+                  ..add(
+                    FetchDriverProfileEvent(driverId: scanData.code),
+                  ),
+                child: InstantBooking(),
+              ),
+            ),
+          );
+        }
       });
     });
   }

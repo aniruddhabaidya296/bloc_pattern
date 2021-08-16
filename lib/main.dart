@@ -1,6 +1,6 @@
 import 'package:bloc_patter_example_app/blocs/university_bloc/university_bloc.dart';
 import 'package:bloc_patter_example_app/blocs/university_bloc/university_event.dart';
-import 'package:bloc_patter_example_app/scan_qr.dart';
+import 'package:bloc_patter_example_app/ui/scan_qr.dart';
 import 'package:bloc_patter_example_app/ui/instant_booking.dart';
 import 'package:bloc_patter_example_app/ui/payment_mode.dart';
 import 'package:bloc_patter_example_app/ui/schedule_rides.dart';
