@@ -39,7 +39,7 @@ class HealthProductsBloc
           for (int i = 0; i < jsonDecoded["limit"]; i++) {
             HealthProduct healthProduct =
                 HealthProduct.fromJson(jsonDecoded["docs"][i]);
-            // print("jsonDecoded[docs][i]: ${jsonDecoded["docs"][i]}");
+            healthProduct.category = ['men'];
             healthproducts.add(healthProduct);
           }
           print("length: ${healthproducts.length}");
@@ -56,6 +56,7 @@ class HealthProductsBloc
           for (int i = 0; i < jsonDecoded["limit"]; i++) {
             HealthProduct healthProduct =
                 HealthProduct.fromJson(jsonDecoded["docs"][i]);
+            healthProduct.category = ['women'];
             healthproducts.add(healthProduct);
           }
           print("length: ${healthproducts.length}");
@@ -72,6 +73,7 @@ class HealthProductsBloc
           for (int i = 0; i < jsonDecoded["limit"]; i++) {
             HealthProduct healthProduct =
                 HealthProduct.fromJson(jsonDecoded["docs"][i]);
+            healthProduct.category = ['baby'];
             healthproducts.add(healthProduct);
           }
           print("length: ${healthproducts.length}");
@@ -90,6 +92,7 @@ class HealthProductsBloc
             HealthProduct healthProduct =
                 HealthProduct.fromJson(jsonDecoded["docs"][i]);
             // print("jsonDecoded[docs][i]: ${jsonDecoded["docs"][i]}");
+            healthProduct.category = ['elder'];
             healthproducts.add(healthProduct);
           }
           print("length: ${healthproducts.length}");
