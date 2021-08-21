@@ -29,6 +29,8 @@ class HealthProductsBloc
         bool women = false;
         bool baby = false;
         bool elder = false;
+        bool hair = false;
+        bool skin = false;
         Response response =
             await healthproductsDao.fetchHealthProducts(category: "men");
 
@@ -101,7 +103,45 @@ class HealthProductsBloc
           yield HealthProductsError(message: "Something went wrong");
         }
 
-        if (men && women && baby && elder) {
+        response =
+            await healthproductsDao.fetchHealthProducts(category: "hair");
+        jsonDecoded = jsonDecode(response.body);
+
+        if (response.statusCode == 200) {
+          hair = true;
+          for (int i = 0; i < jsonDecoded["limit"]; i++) {
+            HealthProduct healthProduct =
+                HealthProduct.fromJson(jsonDecoded["docs"][i]);
+            // print("jsonDecoded[docs][i]: ${jsonDecoded["docs"][i]}");
+            healthProduct.category = ['hair'];
+            healthproducts.add(healthProduct);
+          }
+          print("length: ${healthproducts.length}");
+          // yield HealthProductsLoaded(healthproducts);
+        } else {
+          yield HealthProductsError(message: "Something went wrong");
+        }
+
+        response =
+            await healthproductsDao.fetchHealthProducts(category: "skin");
+        jsonDecoded = jsonDecode(response.body);
+
+        if (response.statusCode == 200) {
+          skin = true;
+          for (int i = 0; i < jsonDecoded["limit"]; i++) {
+            HealthProduct healthProduct =
+                HealthProduct.fromJson(jsonDecoded["docs"][i]);
+            // print("jsonDecoded[docs][i]: ${jsonDecoded["docs"][i]}");
+            healthProduct.category = ['skin'];
+            healthproducts.add(healthProduct);
+          }
+          print("length: ${healthproducts.length}");
+          // yield HealthProductsLoaded(healthproducts);
+        } else {
+          yield HealthProductsError(message: "Something went wrong");
+        }
+
+        if (men && women && baby && elder && hair && skin) {
           yield HealthProductsLoaded(healthproducts);
         }
       } catch (e) {

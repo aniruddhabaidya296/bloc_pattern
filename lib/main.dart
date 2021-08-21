@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
                   HealthProductsBloc()..add(FetchHealthProducts()),
               child: HealthProductList(),
             ),
+            
         '/navigator_page': (context) => NavigatorPage(),
       },
       home: NavigatorPage(),
