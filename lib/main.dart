@@ -1,12 +1,11 @@
 import 'package:bloc_patter_example_app/blocs/university_bloc/university_bloc.dart';
 import 'package:bloc_patter_example_app/blocs/university_bloc/university_event.dart';
-import 'package:bloc_patter_example_app/ui/scan_qr.dart';
-import 'package:bloc_patter_example_app/ui/instant_booking.dart';
-import 'package:bloc_patter_example_app/ui/payment_mode.dart';
-import 'package:bloc_patter_example_app/ui/schedule_rides.dart';
+import 'package:bloc_patter_example_app/ui/health_products_list.dart';
 import 'package:bloc_patter_example_app/ui/single_student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'blocs/health_products_bloc/health_products_bloc.dart';
+import 'blocs/health_products_bloc/health_products_event.dart';
 import 'blocs/student_bloc/student_bloc.dart';
 import 'blocs/student_bloc/student_event.dart';
 import 'models/student.dart';
@@ -36,11 +35,12 @@ class MyApp extends StatelessWidget {
               create: (context) => StudentBloc()..add(FetchStudent()),
               child: StudentHome(),
             ),
-        '/scheduled_rides': (context) => ScheduleRides(),
-        '/instant_booking': (context) => InstantBooking(),
-        '/payment_mode': (context) => PaymentMode(),
+        '/health_list': (context) => BlocProvider<HealthProductsBloc>(
+              create: (context) =>
+                  HealthProductsBloc()..add(FetchHealthProducts()),
+              child: HealthProductList(),
+            ),
         '/navigator_page': (context) => NavigatorPage(),
-        '/qr_scanner': (context) => ScanQR()
       },
       home: NavigatorPage(),
     );
