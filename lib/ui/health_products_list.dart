@@ -3,9 +3,11 @@ import 'package:bloc_patter_example_app/blocs/health_products_bloc/health_produc
 import 'package:bloc_patter_example_app/components/size_config.dart';
 import 'package:bloc_patter_example_app/models/health_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 class HealthProductList extends StatefulWidget {
   HealthProductList({Key key}) : super(key: key);
@@ -22,6 +24,8 @@ class _HealthProductListState extends State<HealthProductList> {
   HealthProductsBloc healthProductsBloc;
   bool isSelected = false;
   final itemSize = SizeConfig.blockHeight * 20;
+  bool clear = true;
+  String dropdownvalue = '';
   List<String> categories = [
     "Women",
     "Skin",
@@ -49,7 +53,7 @@ class _HealthProductListState extends State<HealthProductList> {
     });
   }
 
-  List<HealthProduct> _searchResult = [];
+  List<String> _searchResult = [];
 
   @override
   Widget build(BuildContext context) {
@@ -66,53 +70,100 @@ class _HealthProductListState extends State<HealthProductList> {
               bloc: healthProductsBloc,
               builder: (context, state) {
                 if (state is HealthProductsLoaded) {
-                  onSearchTextChanged(String text) async {
-                    _searchResult.clear();
-                    if (text.isEmpty) {
-                      setState(() {});
-                      return;
-                    }
-
-                    state.healthProducts.forEach((product) {
-                      if (product.name.contains(text))
-                        _searchResult.add(product);
-                    });
-
-                    setState(() {});
-                  }
-
                   return Container(
                     child: Stack(
                       children: [
-                        // Positioned(
-                        //   top: 0,
-                        //   child: Container(
-                        //     height: SizeConfig.blockHeight * 90,
-                        //     color: Theme.of(context).primaryColor,
-                        //     child: Card(
-                        //       child: ListTile(
-                        //         leading: Icon(Icons.search),
-                        //         title: TextFormField(
-                        //           controller: searchController,
-                        //           decoration: InputDecoration(
-                        //               hintText: 'Search',
-                        //               border: InputBorder.none),
-                        //           onChanged: onSearchTextChanged,
-                        //         ),
-                        //         trailing: IconButton(
-                        //           icon: Icon(Icons.cancel),
-                        //           onPressed: () {
-                        //             searchController.clear();
-                        //             onSearchTextChanged('');
-                        //           },
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                        Positioned(
+                          top: 0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black,
+                                    width: SizeConfig.blockWidth * 0.5),
+                                borderRadius: BorderRadius.circular(10)),
+                            alignment: Alignment.center,
+                            constraints: BoxConstraints(
+                              maxHeight: SizeConfig.blockHeight * 10.8,
+                              maxWidth: SizeConfig.blockWidth * 92,
+                            ),
+                            // height: SizeConfig.blockHeight * 10,
+                            child: SearchableDropdown.single(
+                              underline: Container(),
+                              iconEnabledColor: Colors.black,
+                              icon: Container(),
+                              
+                              iconDisabledColor: Colors.white,
+                              displayClearIcon: true,
+                              hint: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: SizeConfig.blockHeight * 1.5),
+                                    child: Icon(
+                                      Icons.search,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(width: 7),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: SizeConfig.blockHeight * 1.5),
+                                    child: Text(
+                                      "Search",
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              displayItem: (item, selected) {
+                                return (Container(
+                                  child: Row(
+                                    children: [
+                                      selected
+                                          ? Icon(
+                                              Icons.radio_button_checked,
+                                              color: Colors.black,
+                                            )
+                                          : Icon(
+                                              Icons.radio_button_unchecked,
+                                              color: Colors.black,
+                                            ),
+                                      SizedBox(width: 7),
+                                      Container(
+                                        width: SizeConfig.blockWidth * 70,
+                                        child: item,
+                                      ),
+                                    ],
+                                  ),
+                                ));
+                              },
+                              items: state.healthProducts.map((item) {
+                                return DropdownMenuItem<String>(
+                                    child: Text(
+                                      "${item.name}",
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    value: item.name);
+                              }).toList(),
+                              isExpanded: true,
+                              value: dropdownvalue,
+                              isCaseSensitiveSearch: true,
+                              searchHint: Text(
+                                'Select ',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  dropdownvalue = value;
+                                  print(dropdownvalue);
+                                });
+                              },
+                            ),
+                          ),
+                        ),
                         Positioned(
                           left: 0,
-                          top: SizeConfig.blockHeight * 10,
+                          top: SizeConfig.blockHeight * 11,
                           child: Column(
                             children: [
                               Container(
@@ -266,12 +317,11 @@ class _HealthProductListState extends State<HealthProductList> {
                         ),
                         Positioned(
                           right: 0,
-                          top: SizeConfig.blockHeight * 10,
+                          top: SizeConfig.blockHeight * 11,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                color: Colors.white,
                                 height: SizeConfig.blockHeight * 90,
                                 width: SizeConfig.blockWidth * 50,
                                 child: GroupedListView<dynamic, String>(
