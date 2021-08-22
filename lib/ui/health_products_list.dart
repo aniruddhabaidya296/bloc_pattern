@@ -27,6 +27,7 @@ class _HealthProductListState extends State<HealthProductList> {
   bool clear = true;
   String dropdownvalue = '';
   List<String> categories = [
+    "CATEGORIES",
     "Women",
     "Skin",
     "Men",
@@ -91,7 +92,6 @@ class _HealthProductListState extends State<HealthProductList> {
                               underline: Container(),
                               iconEnabledColor: Colors.black,
                               icon: Container(),
-                              
                               iconDisabledColor: Colors.white,
                               displayClearIcon: true,
                               hint: Row(
@@ -167,19 +167,6 @@ class _HealthProductListState extends State<HealthProductList> {
                           child: Column(
                             children: [
                               Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    "CATEGORIES",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                color: Colors.white,
                                 height: SizeConfig.blockHeight * 80,
                                 width: SizeConfig.blockWidth * 40,
                                 child: ListView.builder(
@@ -187,128 +174,153 @@ class _HealthProductListState extends State<HealthProductList> {
                                       parent: BouncingScrollPhysics()),
                                   itemCount: categories.length,
                                   itemBuilder: (BuildContext ctxt, int index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        isSelected = true;
-                                        if (categories[index] == 'Women') {
-                                          controller.scrollToIndex(0,
-                                              duration: Duration(seconds: 1),
-                                              preferPosition:
-                                                  AutoScrollPosition.begin);
-                                        } else if (categories[index] ==
-                                            'Skin') {
-                                          setState(() {
-                                            controller.scrollToIndex(20,
-                                                duration: Duration(seconds: 1),
-                                                preferPosition:
-                                                    AutoScrollPosition.begin);
-                                          });
-                                        } else if (categories[index] == 'Men') {
-                                          setState(() {
-                                            controller.scrollToIndex(40,
-                                                duration: Duration(seconds: 1),
-                                                preferPosition:
-                                                    AutoScrollPosition.begin);
-                                          });
-                                        } else if (categories[index] ==
-                                            'Hair') {
-                                          setState(() {
-                                            controller.scrollToIndex(60,
-                                                duration: Duration(seconds: 1),
-                                                preferPosition:
-                                                    AutoScrollPosition.begin);
-                                          });
-                                        } else if (categories[index] ==
-                                            'Elders') {
-                                          setState(() {
-                                            controller.scrollToIndex(80,
-                                                duration: Duration(seconds: 1),
-                                                preferPosition:
-                                                    AutoScrollPosition.begin);
-                                          });
-                                        } else if (categories[index] ==
-                                            'Babies') {
-                                          setState(() {
-                                            controller.scrollToIndex(100,
-                                                duration: Duration(seconds: 1),
-                                                preferPosition:
-                                                    AutoScrollPosition.begin);
-                                          });
-                                        }
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.symmetric(
-                                            vertical:
-                                                SizeConfig.blockHeight * 1),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.red,
-                                                width: SizeConfig.blockWidth *
-                                                    0.5),
-                                            color: Colors.red[50],
-                                            borderRadius: BorderRadius.circular(
-                                                SizeConfig.blockWidth * 2)),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal:
-                                                SizeConfig.blockWidth * 2,
-                                            vertical:
-                                                SizeConfig.blockHeight * 2),
-                                        child: ListTile(
-                                          // alignment: Alignment.centerLeft,
-                                          title: Text(
-                                            "${categories[index]}",
-                                          ),
-                                          trailing: Icon(
-                                            Icons.circle,
-                                            color: (controller.position == null)
-                                                ? Colors.red
-                                                : (controller.position.pixels / 100 > 0 &&
-                                                        controller.position
-                                                                    .pixels /
-                                                                100 <
-                                                            20 &&
-                                                        categories[index] ==
-                                                            "Women")
-                                                    ? Colors.green
-                                                    : (controller.position
-                                                                        .pixels /
-                                                                    100 >
-                                                                20 &&
-                                                            controller
-                                                                        .position
-                                                                        .pixels /
-                                                                    100 <
-                                                                40 &&
-                                                            categories[index] ==
-                                                                "Skin")
-                                                        ? Colors.green
-                                                        : (controller.position.pixels /
-                                                                        100 >
-                                                                    40 &&
-                                                                controller.position.pixels /
-                                                                        100 <
-                                                                    60 &&
-                                                                categories[index] ==
-                                                                    "Men")
-                                                            ? Colors.green
-                                                            : (controller.position.pixels / 100 >
-                                                                        60 &&
-                                                                    controller.position.pixels / 100 <
-                                                                        80 &&
-                                                                    categories[index] ==
-                                                                        "Hair")
-                                                                ? Colors.green
-                                                                : (controller.position.pixels / 100 > 80 &&
-                                                                        controller.position.pixels / 100 < 100 &&
-                                                                        categories[index] == "Elders")
-                                                                    ? Colors.green
-                                                                    : (controller.position.pixels / 100 > 100 && categories[index] == "Babies")
-                                                                        ? Colors.green
-                                                                        : Colors.red,
+                                    if (categories[index] == 'CATEGORIES') {
+                                      return Container(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "CATEGORIES",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    } else {
+                                      return InkWell(
+                                        onTap: () {
+                                          isSelected = true;
+                                          if (categories[index] == 'Women') {
+                                            controller.scrollToIndex(0,
+                                                duration: Duration(seconds: 1),
+                                                preferPosition:
+                                                    AutoScrollPosition.begin);
+                                          } else if (categories[index] ==
+                                              'Skin') {
+                                            setState(() {
+                                              controller.scrollToIndex(20,
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  preferPosition:
+                                                      AutoScrollPosition.begin);
+                                            });
+                                          } else if (categories[index] ==
+                                              'Men') {
+                                            setState(() {
+                                              controller.scrollToIndex(40,
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  preferPosition:
+                                                      AutoScrollPosition.begin);
+                                            });
+                                          } else if (categories[index] ==
+                                              'Hair') {
+                                            setState(() {
+                                              controller.scrollToIndex(60,
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  preferPosition:
+                                                      AutoScrollPosition.begin);
+                                            });
+                                          } else if (categories[index] ==
+                                              'Elders') {
+                                            setState(() {
+                                              controller.scrollToIndex(80,
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  preferPosition:
+                                                      AutoScrollPosition.begin);
+                                            });
+                                          } else if (categories[index] ==
+                                              'Babies') {
+                                            setState(() {
+                                              controller.scrollToIndex(100,
+                                                  duration:
+                                                      Duration(seconds: 1),
+                                                  preferPosition:
+                                                      AutoScrollPosition.begin);
+                                            });
+                                          }
+                                        },
+                                        child: Container(
+                                          margin: (index ==
+                                                  categories.length - 1)
+                                              ? EdgeInsets.only(
+                                                  top: 6,
+                                                  bottom:
+                                                      SizeConfig.blockHeight *
+                                                          20)
+                                              : EdgeInsets.symmetric(
+                                                  vertical:
+                                                      SizeConfig.blockHeight *
+                                                          1),
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.red,
+                                                  width: SizeConfig.blockWidth *
+                                                      0.5),
+                                              color: Colors.red[50],
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      SizeConfig.blockWidth *
+                                                          2)),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  SizeConfig.blockWidth * 2,
+                                              vertical:
+                                                  SizeConfig.blockHeight * 2),
+                                          child: ListTile(
+                                            // alignment: Alignment.centerLeft,
+                                            title: Text(
+                                              "${categories[index]}",
+                                            ),
+                                            trailing: Icon(
+                                              Icons.circle,
+                                              color: (controller.position ==
+                                                      null)
+                                                  ? Colors.red
+                                                  : (controller.position.pixels / 100 >
+                                                              0 &&
+                                                          controller.position.pixels / 100 <
+                                                              20 &&
+                                                          categories[index] ==
+                                                              "Women")
+                                                      ? Colors.green
+                                                      : (controller.position.pixels / 100 > 20 &&
+                                                              controller.position.pixels /
+                                                                      100 <
+                                                                  40 &&
+                                                              categories[index] ==
+                                                                  "Skin")
+                                                          ? Colors.green
+                                                          : (controller.position.pixels /
+                                                                          100 >
+                                                                      40 &&
+                                                                  controller.position.pixels / 100 <
+                                                                      60 &&
+                                                                  categories[index] ==
+                                                                      "Men")
+                                                              ? Colors.green
+                                                              : (controller.position.pixels / 100 >
+                                                                          60 &&
+                                                                      controller.position.pixels / 100 <
+                                                                          80 &&
+                                                                      categories[index] ==
+                                                                          "Hair")
+                                                                  ? Colors.green
+                                                                  : (controller.position.pixels / 100 > 80 &&
+                                                                          controller.position.pixels / 100 < 100 &&
+                                                                          categories[index] == "Elders")
+                                                                      ? Colors.green
+                                                                      : (controller.position.pixels / 100 > 100 && categories[index] == "Babies")
+                                                                          ? Colors.green
+                                                                          : Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
                                   },
                                 ),
                               ),
@@ -347,6 +359,7 @@ class _HealthProductListState extends State<HealthProductList> {
                                     ),
                                   ),
                                   controller: controller,
+                                  shrinkWrap: true,
                                   indexedItemBuilder: (c, element, i) {
                                     return AutoScrollTag(
                                       controller: controller,
@@ -354,8 +367,17 @@ class _HealthProductListState extends State<HealthProductList> {
                                       key: ValueKey(i),
                                       child: Card(
                                         elevation: 8.0,
-                                        margin: new EdgeInsets.symmetric(
-                                            horizontal: 10.0, vertical: 6.0),
+                                        margin: (i ==
+                                                state.healthProducts.length - 1)
+                                            ? EdgeInsets.only(
+                                                left: 10,
+                                                right: 10,
+                                                top: 6,
+                                                bottom:
+                                                    SizeConfig.blockHeight * 20)
+                                            : EdgeInsets.symmetric(
+                                                horizontal: 10.0,
+                                                vertical: 6.0),
                                         child: Container(
                                           height: 100,
                                           decoration: BoxDecoration(
